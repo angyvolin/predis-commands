@@ -1,0 +1,29 @@
+{
+    "name": "angyvolin/predis-commands",
+    "description": "Adds some useful commands to Predis.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrii Volin",
+            "email": "angy.volin@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "predis/predis": "^1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Angyvolin\\Predis\\Command\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Angyvolin\\Predis\\Command\\Tests\\": "tests/"
+        }
+    }
+}
