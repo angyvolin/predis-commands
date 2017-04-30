@@ -8,6 +8,7 @@ Adds some useful commands to Predis.
 ## Commands:
 
     * ZPOP - Removes and returns the top value in a zset, with its score.
+    * ZRPOP - Removes and returns the bottom value in a zset, with its score.
 
 ## License
 
