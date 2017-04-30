@@ -1,13 +1,47 @@
 <?php
 
-namespace Angyvolin\Predis\Command\Test;
+namespace Angyvolin\Predis\Command\Tests;
 
-use phpunit\framework\TestCase;
+use Predis\Command\PredisCommandTestCase;
 
-class ZSetPopTest extends TestCase
+/**
+ * @group commands
+ * @group realm-z
+ */
+class ZSetPopTest extends PredisCommandTestCase
 {
-    public function testZPop()
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedCommand()
     {
-        $this->markTestIncomplete();
+        return 'Angyvolin\Predis\Command\ZSetPop';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedId()
+    {
+        return 'EVALSHA';
+    }
+
+    /**
+     * @group disconnected
+     */
+    public function testFilterArguments()
+    {
+        $command = $this->getCommand();
+        $command->setArguments(['key']);
+
+        $this->assertSame(['a003dd1247fb1f3043a791c365380858f09dca26', 1, 'key'], $command->getArguments());
+    }
+
+    /**
+     * @group disconnected
+     */
+    public function testParseResponse()
+    {
+        $this->assertSame(1, $this->getCommand()->parseResponse(1));
     }
 }

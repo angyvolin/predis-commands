@@ -18,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Angyvolin\\Predis\\Command\\": "src/"
+            "Angyvolin\\Predis\\Command\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Angyvolin\\Predis\\Command\\Tests\\": "tests/"
+            "Angyvolin\\Predis\\Command\\Tests\\": "tests"
         }
     }
 }
