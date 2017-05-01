@@ -1,6 +1,6 @@
 # predis-commands
 
-Adds some useful commands to Predis. 
+Adds some Lua-based atomic commands to Predis. 
 
 
 ## Motivation
