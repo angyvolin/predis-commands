@@ -75,6 +75,13 @@ class PredisCommandsServiceProvider implements ServiceProviderInterface
 ```
 
 
+## Tests:
+
+Tu run tests execute following command in a root directory of the predis-commands project:
+
+    phpunit
+
+
 ## License
 
 [MIT License](LICENSE.md)
