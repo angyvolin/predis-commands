@@ -3,7 +3,7 @@ Adds some useful commands to Predis.
 
 ## Installation
 
-    composer require angyvolin/predis-command
+    composer require angyvolin/predis-commands
 
 ## Commands:
 
