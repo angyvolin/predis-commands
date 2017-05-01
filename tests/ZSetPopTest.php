@@ -2,6 +2,7 @@
 
 namespace Angyvolin\Predis\Command\Tests;
 
+use Angyvolin\Predis\Command\ZSetPop;
 use Predis\Command\PredisCommandTestCase;
 
 /**
@@ -15,7 +16,7 @@ class ZSetPopTest extends PredisCommandTestCase
      */
     protected function getExpectedCommand()
     {
-        return 'Angyvolin\Predis\Command\ZSetPop';
+        return ZSetPop::class;
     }
 
     /**
@@ -43,5 +44,49 @@ class ZSetPopTest extends PredisCommandTestCase
     public function testParseResponse()
     {
         $this->assertSame(1, $this->getCommand()->parseResponse(1));
+    }
+
+    /**
+     * @group disconnected
+     */
+    public function testPopsTheFirstElementFromZSet()
+    {
+        $redis = $this->getClient();
+
+        $redis->zadd('letters', 1, 'a', 2.5, 'b');
+        $this->assertSame(['b', '2.5'], $redis->zpop('letters'));
+        $this->assertSame(['a', '1'], $redis->zpop('letters'));
+    }
+
+    /**
+     * @group disconnected
+     */
+    public function testReturnsEmptyArrayOnEmptyZSet()
+    {
+        $this->assertSame([], $this->getClient()->zpop('letters'));
+    }
+
+    /**
+     * @group disconnected
+     * @expectedException \Predis\Response\ServerException
+     * @expectedExceptionMessage Operation against a key holding the wrong kind of value
+     */
+    public function testThrowsExceptionOnWrongType()
+    {
+        $redis = $this->getClient();
+
+        $redis->set('foo', 'bar');
+        $redis->zpop('foo');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getClient($flushDb = true)
+    {
+        $redis = parent::getClient($flushDb);
+        $redis->getProfile()->defineCommand('zpop', ZSetPop::class);
+
+        return $redis;
     }
 }
